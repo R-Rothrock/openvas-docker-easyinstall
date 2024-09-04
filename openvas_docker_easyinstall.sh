@@ -9,11 +9,11 @@
 
 # Install some dependencies
 
-$DEBUG="\033[36m[-]\033[39m"
-$INFO="\033[32m[+]\033[39m"
-$ERROR="\033[31m[!]\033[39m"
+$DEBUG='\033[36m[-]\033[39m'
+$INFO='\033[32m[+]\033[39m'
+$ERROR='\033[31m[!]\033[39m'
 
-if [ $EUID -ne 0 ]; then
+if [ "$EUID" -ne 0 ]; then
 	echo "$ERROR This program must be run as root."
 	echo "$INFO Try running `sudo $0`"
 
