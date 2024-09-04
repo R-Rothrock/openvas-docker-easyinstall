@@ -62,6 +62,11 @@ printf "${INFO} Installing Docker for Ubuntu\n"
 
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
+printf "${INFO} Enabling and starting services (if they haven't been already."
+
+systemctl enable docker.service
+systemctl start docker.service
+
 ###############
 ##%% SETUP %%##
 ###############
@@ -80,7 +85,7 @@ echo $run_command
 
 printf "${INFO} Adding Greenbone to `/etc/crontab` so it'll start on system startup.\n"
 
-echo "$run_command\n" >> /etc/crontab
+sudo bash -c 'echo "$run_command" >> /etc/crontab'
 
 printf "${INFO} This should do it...\n"
 printf "${INFO} Upon a system reboot you should find Greenbone running on 127.0.0.1:9392.\n"

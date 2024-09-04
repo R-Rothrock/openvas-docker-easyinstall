@@ -17,5 +17,5 @@ read -p "Greenbone password: " password
 
 # Is this jank? Pfft, yeah. And?
 
-return "docker computer -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition exec -u gvmd gvmd gvmd --user=admin --new-password=$password"
+exit "docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition exec -u gvmd gvmd gvmd --user=admin --new-password=$password"
 
