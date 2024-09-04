@@ -15,7 +15,7 @@ docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-editio
 #$password='password'
 
 # settings password manually
-for 1; do
+while true; do
 
 	read -p "Password: " password
 	read -p "Confirm Password: " confirmpassword
