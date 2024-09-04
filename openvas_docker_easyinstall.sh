@@ -9,29 +9,28 @@
 
 # Install some dependencies
 
-$RESET='\033[0m'
-$DEBUG='\033[0;36m[-]$RESET'
-$INFO='\033[0;32m[+]$RESET'
-$ERROR='\033[0;31m[!]$RESET'
+DEBUG='\033[0;36m[-]\033[0m'
+INFO='\033[0;32m[+]\033[0m'
+ERROR='\033[0;31m[!]\033[0m'
 
 if [ "$EUID" -ne 0 ]; then
-	printf "${ERROR} This program must be run as root."
-	printf "${INFO} Try running `sudo $0`"
+	printf "${ERROR} This program must be run as root.\n"
+	printf "${INFO} Try running `sudo $0`\n"
 
 	exit 1
 fi
 
 # Checking WIFI connectivity by pinging google.com
 
-printf "${DEBUG} Testing internet access by pinging google.com"
+printf "${DEBUG} Testing internet access by pinging google.com\n"
 
 wget -q --spider http://google.com
 
 if [$? -eq 0 ]; then
-	printf "${DEBUG} Successfully tested internet access."
+	printf "${DEBUG} Successfully tested internet access.\n"
 else
-	printf "${ERROR} No internet access."
-	return 1
+	printf "${ERROR} No internet access.\n"
+	exit 1
 fi
 
 # Uninstalling conflicting Ubuntu packages (shouldn't be an issue on
