@@ -13,7 +13,7 @@ DEBUG='\033[0;36m[-]\033[0m'
 INFO='\033[0;32m[+]\033[0m'
 ERROR='\033[0;31m[!]\033[0m'
 
-if [ "$EUID" != 0 ]; then
+if [ "$EUID" == 0 ]; then
 	printf "${ERROR} This program must be run as root. Exiting...\n"
 
 	exit 1
