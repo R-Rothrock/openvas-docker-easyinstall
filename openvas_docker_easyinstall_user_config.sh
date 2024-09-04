@@ -10,23 +10,7 @@ docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-editio
 
 docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition up -d
 
-# I'm fully aware this is dumb... I don't care.
-#user=admin
-#$password='password'
-
-# settings password manually
-while true; do
-
-	read -p " Greenbone password: " password
-	read -p "Confirm Password: " confirmpassword
-
-	if [ "$password" == "$confirmpassword" ]; then
-		break
-	else
-		echo "Passwords don't match!"
-	fi
-
-done
+read -p "Greenbone password: " password
 
 #docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition \
 #    exec -u gvmd gvmd gvmd --user=admin --new-password=$password
