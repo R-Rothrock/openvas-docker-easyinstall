@@ -46,7 +46,7 @@ printf "${INFO} Installing required tools.\n"
 apt install -y curl
 
 # Setting up the Docker repository
-printf "${INFO} Setting up the Docker Repository"
+printf "${INFO} Setting up the Docker Repository\n"
 
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -58,7 +58,7 @@ echo \
 apt update -y
 
 # Installing Docker
-printf "${INFO} Installing Docker for Ubuntu"
+printf "${INFO} Installing Docker for Ubuntu\n"
 
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
