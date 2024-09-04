@@ -20,7 +20,7 @@ while true; do
 	read -p " Greenbone password: " password
 	read -p "Confirm Password: " confirmpassword
 
-	if [ $password == $confirmpassword ]; then
+	if [ "$password" == "$confirmpassword" ]; then
 		break
 	else
 		echo "Passwords don't match!"
