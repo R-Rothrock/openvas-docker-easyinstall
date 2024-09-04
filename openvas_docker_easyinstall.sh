@@ -14,8 +14,7 @@ INFO='\033[0;32m[+]\033[0m'
 ERROR='\033[0;31m[!]\033[0m'
 
 if [ "$EUID" -ne 0 ]; then
-	printf "${ERROR} This program must be run as root.\n"
-	printf "${INFO} Try running `sudo $0`\n"
+	printf "${ERROR} This program must be run as root. Exiting...\n"
 
 	exit 1
 fi
@@ -29,7 +28,7 @@ wget -q --spider http://google.com
 if [$? -eq 0 ]; then
 	printf "${DEBUG} Successfully tested internet access.\n"
 else
-	printf "${ERROR} No internet access.\n"
+	printf "${ERROR} No internet access. Exiting...\n"
 	exit 1
 fi
 
