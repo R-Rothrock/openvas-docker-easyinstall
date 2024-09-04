@@ -35,15 +35,15 @@ fi
 # Uninstalling conflicting Ubuntu packages (shouldn't be an issue on
 # a fresh system, but, ya know... Ubuntu actually has programs on it
 # when you boot it for the first time.)
-printf "${INFO} Handling any/all package conflicts."
+printf "${INFO} Handling any/all package conflicts.\n"
 
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
 	apt remove -y $pkg
 done
 
-printf "${INFO} Installing required tools."
+printf "${INFO} Installing required tools.\n"
 
-apt install -u curl
+apt install -y curl
 
 # Setting up the Docker repository
 printf "${INFO} Setting up the Docker Repository"
@@ -55,12 +55,12 @@ echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
-apt update
+apt update -y
 
 # Installing Docker
 printf "${INFO} Installing Docker for Ubuntu"
 
-apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 ###############
 ##%% SETUP %%##
@@ -73,17 +73,17 @@ usermod -aG docker dicksonitllc
 sudo -u dicksonitllc ./openvas_docker_easyinstall_user_config.sh
 $run_command = $?
 
-printf "${DEBUG} To clarify, this script doesn't actually start Greenbone."
+printf "${DEBUG} To clarify, this script doesn't actually start Greenbone.\n"
 
-printf "${DEBUG} The command to start Greenbone:"
-printf "$run_command"
+printf "${DEBUG} The command to start Greenbone:\n"
+echo $run_command
 
-printf "${INFO} Adding Greenbone to `/etc/crontab` so it'll start on system startup."
+printf "${INFO} Adding Greenbone to `/etc/crontab` so it'll start on system startup.\n"
 
-printf "$run_command" >> /etc/crontab
+echo "$run_command\n" >> /etc/crontab
 
-printf "${INFO} This should do it..."
-printf "${INFO} Upon a system reboot you should find Greenbone running on 127.0.0.1:9392."
+printf "${INFO} This should do it...\n"
+printf "${INFO} Upon a system reboot you should find Greenbone running on 127.0.0.1:9392.\n"
 
 # ya welcome
 
