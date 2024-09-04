@@ -41,6 +41,10 @@ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
 	apt remove -y $pkg
 done
 
+printf "${INFO} Installing required tools."
+
+apt install -u curl
+
 # Setting up the Docker repository
 printf "${INFO} Setting up the Docker Repository"
 
