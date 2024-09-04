@@ -100,11 +100,11 @@ echo $run_command
 
 printf "${INFO} Adding Greenbone to \`/etc/crontab\` so it'll start on system startup.\n"
 
-sudo bash -c 'echo "$run_command" >> /etc/crontab'
+echo $run_command | sudo tee -a /etc/crontab
 
 printf "${INFO} This should do it...\n"
 printf "${INFO} Upon a system reboot you should find Greenbone running on 127.0.0.1:9392.\n"
 
 # ya welcome
-cd old_dir
+cd $old_dir
 
