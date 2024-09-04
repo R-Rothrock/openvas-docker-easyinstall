@@ -73,17 +73,32 @@ systemctl start docker.service
 
 usermod -aG docker dicksonitllc
 
-# Executing secondary script as user dicksonitllc
+# Executing stuff as user dicksonitllc
 
-sudo -u dicksonitllc ./openvas_docker_easyinstall_user_config.sh
-$run_command = $?
+#sudo -u dicksonitllc ./openvas_docker_easyinstall_user_config.sh
+DOWNLOAD_DIR=/home/dicksonitllc/greenbone-community-container
+
+sudo -u dicksonitllc export DOWNLOAD_DIR=$DOWNLOAD_DIR
+sudo -u dicksonitllc mkdir $DOWNLOAD_DIR
+
+old_dir=$(pwd)
+cd $DOWNLOAD_DIR
+
+curl -f -L https://greenbone.github.io/docs/latest/_static/docker-compose-22.4.yml -o docker-compose.yml
+
+sudo -u dicksonitllc docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition pull
+sudo docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition up -d
+
+read -p "Set Greenbone password: " password
+
+run_command="docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition exec -u gvmd gvmd gvmd --user=admin --new-password=$password"
 
 printf "${DEBUG} To clarify, this script doesn't actually start Greenbone.\n"
 
 printf "${DEBUG} The command to start Greenbone:\n"
 echo $run_command
 
-printf "${INFO} Adding Greenbone to `/etc/crontab` so it'll start on system startup.\n"
+printf "${INFO} Adding Greenbone to \`/etc/crontab\` so it'll start on system startup.\n"
 
 sudo bash -c 'echo "$run_command" >> /etc/crontab'
 
@@ -91,4 +106,5 @@ printf "${INFO} This should do it...\n"
 printf "${INFO} Upon a system reboot you should find Greenbone running on 127.0.0.1:9392.\n"
 
 # ya welcome
+cd old_dir
 
