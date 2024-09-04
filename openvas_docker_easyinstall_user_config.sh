@@ -17,10 +17,10 @@ docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-editio
 # settings password manually
 while true; do
 
-	read -p "Password: " password
+	read -p " Greenbone password: " password
 	read -p "Confirm Password: " confirmpassword
 
-	if [ $password -eq $confirmpassword ]; then
+	if [ $password == $confirmpassword ]; then
 		break
 	else
 		echo "Passwords don't match!"
