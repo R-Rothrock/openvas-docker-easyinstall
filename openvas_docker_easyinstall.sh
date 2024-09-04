@@ -93,18 +93,17 @@ read -p "Set Greenbone password: " password
 
 run_command="docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-community-edition exec -u gvmd gvmd gvmd --user=admin --new-password=$password"
 
-printf "${DEBUG} To clarify, this script doesn't actually start Greenbone.\n"
-
-printf "${DEBUG} The command to start Greenbone:\n"
-echo $run_command
-
 printf "${INFO} Adding Greenbone to \`/etc/crontab\` so it'll start on system startup.\n"
 
 echo $run_command | sudo tee -a /etc/crontab
 
 printf "${INFO} This should do it...\n"
-printf "${INFO} Upon a system reboot you should find Greenbone running on 127.0.0.1:9392.\n"
+printf "${INFO} You should find Greenbone running on 127.0.0.1:9392.\n"
 
 # ya welcome
 cd $old_dir
+
+echo $run_command | bash
+
+printf "${INFO} You're welcome."
 
