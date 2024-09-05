@@ -95,7 +95,7 @@ run_command="docker compose -f $DOWNLOAD_DIR/docker-compose.yml -p greenbone-com
 
 printf "${INFO} Adding Greenbone to \`/etc/crontab\` so it'll start on system startup.\n"
 
-echo $run_command | sudo tee -a /etc/crontab
+echo "@reboot $run_command" | sudo tee -a /etc/crontab
 
 printf "${INFO} This should do it...\n"
 printf "${INFO} You should find Greenbone running on 127.0.0.1:9392.\n"
